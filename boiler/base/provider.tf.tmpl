@@ -1,0 +1,16 @@
+terraform {
+  backend "s3" {
+    bucket = "sandbox-iac-opentofu"
+    key    = "{{ .KEY_PATH }}/state.tfstate"
+    region = "ap-southeast-1"
+    #dynamodb_table = ""
+  }
+}
+
+provider "aws" {
+  region = var.region
+}
+
+variable "region" {
+  default = "ap-southeast-1"
+}
