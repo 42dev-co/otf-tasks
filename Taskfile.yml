@@ -4,7 +4,7 @@ tasks:
   silent: true
   init:
     silient: true
-    desc: "Set up the OpenTofu Project"
+    desc: "Set up the OpenTofu Project. Required: name:string, description:string, tier:number"
     # take inputs for name, description and tier
     inputs:
       - name: name
