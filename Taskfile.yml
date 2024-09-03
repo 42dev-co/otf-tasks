@@ -39,7 +39,7 @@ tasks:
         echo "Name: $name"
         echo "Description: $description"
         echo "Tier: $tier"
-        echo "CWD: {{.CURRENT_DIR}}"
+        echo "CWD: {{.USER_WORKING_DIR}}"
 
         # Create `name` folder as a new project
         # Throw error if folder already exists
@@ -47,14 +47,14 @@ tasks:
           echo "Project already exists"
           exit 1
         else
-          mkdir {{.CURRENT_DIR}}/$name
+          mkdir {{.USER_WORKING_DIR}}/$name
         fi
         
         # Copy Base folder relative this Taskfile to `name` folder
-        cp -r {{.CURRENT_DIR}}/modules/otf/boiler/* {{.CURRENT_DIR}}/$name/
-        echo "# ${name}" > {{.CURRENT_DIR}}/$name/README.md
-        echo "${description}" >> {{.CURRENT_DIR}}/$name/README.md
-        echo "TIER=${tier}" > {{.CURRENT_DIR}}/$name/setup.config
-        echo "TF_VERSION=1.8" >> {{.CURRENT_DIR}}/$name/setup.config
+        cp -r {{.USER_WORKING_DIR}}/modules/otf/boiler/* {{.USER_WORKING_DIR}}/$name/
+        echo "# ${name}" > {{.USER_WORKING_DIR}}/$name/README.md
+        echo "${description}" >> {{.USER_WORKING_DIR}}/$name/README.md
+        echo "TIER=${tier}" > {{.USER_WORKING_DIR}}/$name/setup.config
+        echo "TF_VERSION=1.8" >> {{.USER_WORKING_DIR}}/$name/setup.config
         echo "Project created successfully"
 
