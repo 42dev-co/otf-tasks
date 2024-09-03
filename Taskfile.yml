@@ -51,7 +51,7 @@ tasks:
         fi
         
         # Copy Base folder relative this Taskfile to `name` folder
-        cp -r {{.TASKFILE}}/modules/otf/boiler/* {{.USER_WORKING_DIR}}/$name/
+        cp -r {{.ROOT_DIR}}/modules/otf/boiler/* {{.USER_WORKING_DIR}}/$name/
         echo "# ${name}" > {{.USER_WORKING_DIR}}/$name/README.md
         echo "${description}" >> {{.USER_WORKING_DIR}}/$name/README.md
         echo "TIER=${tier}" > {{.USER_WORKING_DIR}}/$name/setup.config
