@@ -13,12 +13,15 @@ tasks:
         desc: "Description of the environment"
       - name: tier
         desc: "Tier of the environment"
+      - name: version
+        desc: "Version of the OpenTofu"
     cmds:
-      - echo "Setting up OpenTF..."
       - |
+        echo "Setting up OpenTF..."
         name={{.name}}
         description="{{.description}}"
         tier={{.tier}}
+        version={{.version}}
         
         # if name is not provided, throw error and exit
         if [ -z "$name" ]; then
@@ -36,6 +39,11 @@ tasks:
           tier=1
         fi
 
+        # if version is not provided, set it to 1.8 
+        if [ -z "$version" ]; then
+          version=1.8
+        fi
+
         echo "Name: $name"
         echo "Description: $description"
         echo "Tier: $tier"
@@ -51,10 +59,10 @@ tasks:
         fi
         
         # Copy Base folder relative this Taskfile to `name` folder
-        cp -r {{.ROOT_DIR}}/modules/otf/boiler/* {{.USER_WORKING_DIR}}/$name/
+        cp -r {{.TASKFILE_DIR}}/boiler/* {{.USER_WORKING_DIR}}/$name/
         echo "# ${name}" > {{.USER_WORKING_DIR}}/$name/README.md
         echo "${description}" >> {{.USER_WORKING_DIR}}/$name/README.md
         echo "TIER=${tier}" > {{.USER_WORKING_DIR}}/$name/setup.config
-        echo "TF_VERSION=1.8" >> {{.USER_WORKING_DIR}}/$name/setup.config
+        echo "TF_VERSION=${version}" >> {{.USER_WORKING_DIR}}/$name/setup.config
         echo "Project created successfully"
 
